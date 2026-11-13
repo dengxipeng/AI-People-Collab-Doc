@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI 协作文档</title>
+    <script>
+      (function() {
+        var params = new URLSearchParams(window.location.search);
+        var docId = params.get('doc');
+        if (docId) {
+          var cleanUrl = window.location.origin + window.location.pathname;
+          window.history.replaceState(null, '', cleanUrl + '#/doc/' + docId);
+        }
+      })();
+    </script>
+    <script type="module" crossorigin src="https://jtdtfoogzyhkonbkwoha.supabase.co/storage/v1/object/public/web/assets/index-i-WptZjo.js"></script>
+    <link rel="stylesheet" crossorigin href="https://jtdtfoogzyhkonbkwoha.supabase.co/storage/v1/object/public/web/assets/index-D13oN1xv.css">
+  </head>
+  <body>
+    <div id="app">
+      <!-- 加载状态遮罩 -->
+      <div id="loading" class="loading-overlay">
+        <div class="spinner"></div>
+        <p class="loading-text">正在加载文档...</p>
+      </div>
+
+      <!-- 顶部标题栏 -->
+      <header class="header">
+        <div class="header-left">
+          <span class="logo-dot"></span>
+          <h1 id="doc-title" class="doc-title">未命名文档</h1>
+        </div>
+        <div class="header-right">
+          <span id="status-badge" class="status-badge">open</span>
+          <span id="version-tag" class="version-tag" title="当前文档版本号">v0</span>
+        </div>
+      </header>
+
+      <!-- 主区域：左侧编辑器 + 右侧消息区 -->
+      <main class="main">
+        <!-- 左侧编辑器 -->
+        <section class="editor-section">
+          <div class="editor-toolbar">
+            <span class="toolbar-label">Markdown 编辑器</span>
+            <span id="sync-indicator" class="sync-indicator">已同步</span>
+          </div>
+          <textarea
+            id="editor"
+            class="editor"
+            placeholder="在此编辑文档内容（支持 Markdown 纯文本）..."
+            spellcheck="false"
+            disabled
+          ></textarea>
+        </section>
+
+        <!-- 右侧消息区 -->
+        <section class="messages-section">
+          <div class="messages-header">
+            <span>对话消息</span>
+          </div>
+          <div id="messages-list" class="messages-list">
+            <div class="messages-empty">暂无消息</div>
+          </div>
+          <div class="message-input-area">
+            <input
+              id="message-input"
+              class="message-input"
+              type="text"
+              placeholder="输入消息后按回车发送..."
+              disabled
+            />
+            <button id="send-btn" class="send-btn" disabled>发送</button>
+          </div>
+        </section>
+      </main>
+
+      <!-- 文档关闭遮罩 -->
+      <div id="closed-overlay" class="closed-overlay hidden">
+        <div class="closed-card">
+          <div class="closed-icon">✕</div>
+          <h2>文档已关闭</h2>
+          <p>该文档已被关闭，无法继续编辑或发送消息。</p>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>
